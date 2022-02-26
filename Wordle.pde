@@ -1,5 +1,5 @@
-float displayDensity = 1;
-boolean isJava = true;
+//float displayDensity = 1;
+boolean isJava = false;
 
 String answerString;
 Cell[][] array = new Cell[6][5];
