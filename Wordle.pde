@@ -164,14 +164,16 @@ void keyPressed() {
   }
 }
 
-void reset() {
+void reset(boolean resetKeys) {
   for (Cell[] arrays : array) {
     for (Cell c : arrays) {
       c.reset();
     }
   }
-  for (KeyCell kc : keycells) {
-    kc.type = LIGHTGREY;
+  if (resetKeys) {
+    for (KeyCell kc : keycells) {
+      kc.type = LIGHTGREY;
+    }
   }
   currentLine = 0;
   currentLetter = 0;
@@ -232,11 +234,6 @@ void enter() {
 }
 
 void gameOver() {
-  println(
-    "-----GAME OVER-----\n"
-    + "The word was: " + answerString + "\n"
-    + "-------------------"
-    );
   Cell[] thisWord = array[5];
   for (int i = 0; i < thisWord.length; i++) {
     Cell thisCell = thisWord[i];

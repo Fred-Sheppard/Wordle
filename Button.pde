@@ -52,7 +52,7 @@ class ClearButton extends Button {
 
   void activate() {
     if (gameOver) return;
-    reset();
+    reset(false);
   }
 }
 
@@ -67,7 +67,7 @@ class NewGameButton extends Button {
   }
 
   void activate() {
-    reset();
+    reset(true);
     setWord();
     gameOver = false;
   }
