@@ -1,5 +1,5 @@
-//float displayDensity = 1;
-boolean isJava = false;
+float displayDensity = 1;
+boolean isJava = true;
 
 String answerString;
 Cell[][] array = new Cell[6][5];
@@ -29,7 +29,8 @@ float cellOutline, cellSize;
 float fontSize;
 boolean winSplash, loseSplash;
 int timer, timerIterate;
-boolean animate;
+boolean animate, init;
+boolean start;
 
 void settings() {
   if (isJava) size(500, 1000);
@@ -42,8 +43,6 @@ void setup() {
   frameRate(20);
   strokeWeight(3);
   fontSize = 40*displayDensity;
-  PFont myFont = createFont("LSANS.TTF", fontSize);
-  textFont(myFont);
   textAlign(CENTER, CENTER);
   cellOutline = width/6;
   cellSize = cellOutline*0.9;
@@ -54,7 +53,13 @@ void setup() {
   green = color(#538D4E);
   blue = color(#207EE0);
   light_grey = color(#818384);
+  PFont myFont = createFont("LSANS.TTF", fontSize);
+  textFont(myFont);
+  loadingScreen();
+  thread("init");
+}
 
+void init() {
   allowedWords = loadStrings("allowedwords.txt");
   setWord();
 
@@ -88,6 +93,7 @@ void setup() {
   buttons[0] = new ClearButton(width/8, height*.6);
   buttons[1] = new NewGameButton(width/2, height*.6);
   buttons[2] = new EndButton(width*7/8, height*.6);
+  init = true;
 }
 
 void setWord() {
@@ -110,6 +116,7 @@ void setWord() {
 }
 
 void draw() {
+  if (!init || !start) return;
   background(black);
   for (Cell[] arrays : array) {
     for (Cell c : arrays) {
@@ -132,6 +139,10 @@ void draw() {
 }
 
 void mousePressed() {
+  if (!start) {
+    start = true;
+    return;
+  }
   winSplash = false;
   loseSplash = false;
   if (animate) return;
@@ -219,7 +230,7 @@ void backSpace() {
 }
 
 void enter() {
-  if (currentLine == 5) 
+  if (currentLine == 5)
     if (gameOver) return;
   if (currentLetter == 5) {
     if (checkValue(array[currentLine])) {
@@ -280,4 +291,13 @@ void loseSplash() {
     +"The Correct Word was " + answerString
     );
   text(s, width/2, height/2);
+}
+
+void loadingScreen() {
+  textAlign(CENTER, CENTER);
+  textSize(200*displayDensity);
+  background(green);
+  text("W", width/2, height/2);
+  textSize(30*displayDensity);
+  text("Click to Start", width/2, height*.625);
 }
