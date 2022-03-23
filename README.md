@@ -1,4 +1,5 @@
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/fred-sheppard/wordle?color=y&sort=semver)](https://github.com/Fred-Sheppard/Wordle/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/fred-sheppard/wordle?color=brightgreen&sort=semver)](https://github.com/Fred-Sheppard/Wordle/releases)
+[![platform](https://img.shields.io/badge/platform-win--64%20%7C%20android-blue)](https://github.com/Fred-Sheppard/Wordle/releases)
 # Wordle
 A simple Wordle clone for PC and Android. Written in Processing 3 and 4
 by Fred Sheppard
