@@ -17,7 +17,10 @@ class Counter { //<>//
 boolean checkValue(Cell[] word) {
   {
     //Comment out this line to remove verification
-    if (!isLegal(word)) return false;
+    if (!isLegal(word)) {
+      showToast("Word not Found");
+      return false;
+    }
     Counter[] countersCopy = new Counter[26];
     for (int z = 0; z < countersCopy.length; z++) {
       countersCopy[z] = counters[z].copy();
@@ -32,7 +35,7 @@ boolean checkValue(Cell[] word) {
         thisCounter.amount--;
         for (KeyCell kc : keycells) {
           if (kc.character == currentCell.letter) 
-          kc.newType = GREEN;
+            kc.newType = GREEN;
         }
         continue Letter;
       }
@@ -102,14 +105,14 @@ void animate(int interval) {
     if (timerIterate++ > 3) {
       animate = false; 
       for (Cell c : word) {
-       for (KeyCell kc : keycells) {
-         if (c.letter == kc.character) {
-           kc.setType();
-         }
-       }
+        for (KeyCell kc : keycells) {
+          if (c.letter == kc.character) {
+            kc.setType();
+          }
+        }
       }
       for (KeyCell kc : keycells) {
-       kc.newType = LIGHTGREY; 
+        kc.newType = LIGHTGREY;
       }
     }
   }

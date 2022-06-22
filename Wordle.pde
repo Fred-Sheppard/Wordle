@@ -1,5 +1,8 @@
-float displayDensity = 1;
-boolean isJava = true;
+//float displayDensity = 1;
+boolean isJava = false;
+
+import android.widget.Toast;
+import android.app.Activity;
 
 String answerString;
 Cell[][] array = new Cell[6][5];
@@ -8,6 +11,7 @@ KeyCell[] keycells = new KeyCell[26];
 BigKey EnterKey;
 BigKey DelKey;
 Button[] buttons = new Button[3];
+Activity act;
 
 String[] allowedWords;
 char[] answer;
@@ -33,8 +37,8 @@ boolean animate, init;
 boolean start;
 
 void settings() {
-  if (isJava) size(500, 1000);
-  else size(displayWidth, displayHeight);
+  if (isJava) {size(500, 1000);}
+  else {size(displayWidth, displayHeight);}
 }
 
 void setup() {
@@ -42,6 +46,7 @@ void setup() {
   orientation(PORTRAIT);
   frameRate(20);
   strokeWeight(3);
+  act = this.getActivity();
   fontSize = 40*displayDensity;
   textAlign(CENTER, CENTER);
   cellOutline = width/6;
@@ -53,8 +58,10 @@ void setup() {
   green = color(#538D4E);
   blue = color(#207EE0);
   light_grey = color(#818384);
-  PFont myFont = createFont("LSANS.TTF", fontSize);
-  textFont(myFont);
+  //J/A
+  //PFont myFont = createFont("LSANS.TTF", fontSize);
+  //textFont(myFont);
+  textSize(fontSize);
   loadingScreen();
   thread("init");
 }
@@ -300,4 +307,13 @@ void loadingScreen() {
   text("W", width/2, height/2);
   textSize(30*displayDensity);
   text("Click to Start", width/2, height*.625);
+}
+
+void showToast(final String message) {
+  act.runOnUiThread(new Runnable() {
+    public void run() { 
+      android.widget.Toast.makeText(act.getApplicationContext(), message, android.widget.Toast.LENGTH_SHORT).show();
+    }
+  }
+  );
 }
